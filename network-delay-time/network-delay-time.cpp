@@ -3,20 +3,25 @@ public:
     int dijkstr(vector<vector<pair<int,int>>> &graph, int V, int src)
     {
         vector<bool>vis(V+1, false);
-        vector<int> dis(V+1, 1e8);
+        vector<int> dis(V+1, 1e8), par(V+1,-1);
         priority_queue<pair<int,int>,vector<pair<int,int>>, greater<pair<int,int>>> pq;
         pq.push({0,src});
+        dis[src] = 0, par[src] = -1;
         while(pq.size()!=0)
         {
             pair<int,int> p = pq.top();
             pq.pop();
             if(vis[p.second]) continue;
             vis[p.second] = true;
-            dis[p.second] = p.first;
+            //dis[p.second] = p.first;
             for (pair<int,int> e : graph[p.second])
             {
-                if (!vis[e.first])
+                if (!vis[e.first] && e.second + p.first <dis[e.first])
+                {
                     pq.push({p.first + e.second,e.first});
+                    dis[e.first] = e.second + p.first;
+                    par[e.first] = p.first;
+                }
             }
         }
         int maxTime = 0;
