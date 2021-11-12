@@ -1,23 +1,23 @@
 class Solution {
 public:
-    int dp[201][201];
-    int solve(vector<vector<int>>&grid,int i,int j)
+    int solve(vector<vector<int>>&grid,int i,int j, vector<vector<int>> &dp)
     {
-        if(i<0||j<0)
+        int n=grid.size(),m=grid[0].size();
+        if(i>=n||j>=m)
              return INT_MAX;
         if(dp[i][j]!=-1)
             return dp[i][j];
-         if(i==0&&j==0)
-            return grid[0][0];
-        int a1=solve(grid,i-1,j);
-        int a2=solve(grid,i,j-1);
+         if(i==n-1 && j==m-1)
+            return grid[i][j];
+        int a1=solve(grid,i+1,j,dp);
+        int a2=solve(grid,i,j+1,dp);
         dp[i][j]=grid[i][j]+min(a1,a2);
         return dp[i][j];
     }
     int minPathSum(vector<vector<int>>& grid) 
     {
        int n=grid.size(),m=grid[0].size();
-       memset(dp,-1,sizeof(dp));
-       return solve(grid,n-1,m-1);
+       vector<vector<int>> dp(n,vector<int>(m,-1)); 
+       return solve(grid,0,0,dp);
     }
 };
