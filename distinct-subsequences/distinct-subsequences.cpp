@@ -17,6 +17,13 @@ public:
     int numDistinct(string s, string t) {
         int n=s.length(),m=t.length();
         vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
-        return sol(n,m,s,t,dp);
+        int ans = sol(n,m,s,t,dp);
+        // for(vector<int> d : dp)
+        // {
+        //     for(int i : d)
+        //         cout<<i<<"\t";
+        //     cout<<endl;
+        // }
+        return ans;
     }
 };
