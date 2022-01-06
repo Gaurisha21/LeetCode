@@ -12,10 +12,10 @@ public:
         {
             if(isVow(str[e++]))
                 vow++;
-            maxVow = max(maxVow,vow);
             count++;
             while(count==k)
             {
+                maxVow = max(maxVow,vow);
                 if(isVow(str[s++]))
                     vow--;
                 count--;
