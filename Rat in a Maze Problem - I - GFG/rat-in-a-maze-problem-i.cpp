@@ -12,35 +12,36 @@ using namespace std;
 
 class Solution{
     public:
-    int floodFill(int sr, int sc, vector<vector<int>> &vis, vector<vector<int>> &dir, vector<string> &dirS, vector<string> &res, string psf)
+    int maze(int sr, int sc, vector<vector<int>> dir, vector<string> dirS, string s, vector<vector<int>> &m, vector<string> &ans)
     {
-        int n = vis.size(), m = vis[0].size();
-
-        if (sr == n - 1 && sc == m - 1) {
-            res.push_back(psf);
+        int n=m.size();
+        if(sr==n-1 and sc==n-1)
+        {
+            ans.push_back(s);
             return 1;
         }
-
-        int count = 0;
-        vis[sr][sc] = 0;
-        for (int d = 0; d < dir.size(); d++) {
-            int r = sr + dir[d][0];
-            int c = sc + dir[d][1];
-
-            if (r >= 0 && c >= 0 && r < n && c < m && vis[r][c]==1)
-                count += floodFill(r, c, vis, dir, dirS, res, psf + dirS[d]);
+        int count=0;
+        m[sr][sc]=0;
+        for(int d=0; d<dir.size(); d++)
+        {
+            int r=sr+dir[d][0];
+            int c=sc+dir[d][1];
+            if(r>=0 and c>=0 and r<n and c<n and m[r][c]==1)
+            {
+                count+=maze(r,c,dir,dirS,s+dirS[d],m,ans);
+            }
         }
-        vis[sr][sc] = 1;
+        m[sr][sc]=1;
         return count;
     }
     vector<string> findPath(vector<vector<int>> &m, int n) {
-        vector<string> dirS = {"D","L","R","U"};
-        vector<vector<int>> dir = {{1,0},{0,-1},{0,1},{-1,0}};
-        vector<string> res;
-        if(m[0][0]==0 || m[n-1][n-1]==0) return res;
-        int count = floodFill(0, 0, m, dir, dirS, res, "");
-        return res;
-        
+        vector<vector<int>> dir{{-1,0},{1,0},{0,-1},{0,1}};
+        vector<string> dirS{"U","D","L","R"};
+        vector<string> ans;
+        string s="";
+        if(m[0][0]==0 || m[n-1][n-1]==0) return ans;
+        int count=maze(0,0,dir,dirS,"",m,ans);
+        return ans;
     }
 };
 
