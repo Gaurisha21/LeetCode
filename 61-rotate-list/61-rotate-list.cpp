@@ -27,6 +27,7 @@ public:
         k=n-k;
         if(k==n || k==0) return head;
         int h=k;
+        
         ListNode *temp=head, *prev;
         while(h>0)
         {
