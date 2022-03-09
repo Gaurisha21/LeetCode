@@ -2,9 +2,10 @@ class Node{
 public:
     int val;
     Node *next;
+    Node *prev;
     Node(){val=0; next=NULL;}
-    Node(int data){val=data; next=NULL;}
-    Node(int data, Node *next){val=data; next=next;}
+    Node(int data){val=data; next=NULL; prev=NULL;}
+    Node(int data, Node *Next, Node *Prev){val=data; next=Next; prev=Prev;}
 };
 
 class MyLinkedList {
@@ -16,120 +17,108 @@ public:
         head=NULL;
     }
     
-    void print(Node *head)
-    {
-        Node *temp=head;
-        while(temp!=NULL) 
-        {
-            cout<<temp->val<<" ";
-            temp=temp->next;
-        }
-        cout<<endl;
-    }
-    
     int get(int index) {
-        if(index >= size || index < 0) return -1;
-        Node *curr = head;
-        for (int i = 0; i< index; i++)
-        {
-            curr = curr->next;
-        }
-        return curr->val;
+        if(index>=size || index<0) return -1;
+        Node *temp=head;
+        while(index-->0)
+            temp=temp->next;
+        return temp->val;
     }
     
     void addAtHead(int val) {
-        Node *node=new Node(val);
-        // cout<<"node "<<node->val<<endl;
-        if(head==NULL)
+        Node *node = new Node(val);
+        if(head==NULL) 
         {
             head=node;
+            head->next=head->prev=NULL;
         }
         else
         {
             node->next=head;
+            head->prev=node;
             head=node;
-            // cout<<head->val<<endl;
         }
         size++;
-        // cout<<"AH size "<<size<<endl;
-        // print(head);
+        // cout<<size<<endl;
+        return;
     }
     
     void addAtTail(int val) {
-        Node *node=new Node(val);
-        if(head==NULL)
+        Node *node = new Node(val), *temp=head;
+        if(head==NULL) 
         {
             head=node;
-            // cout<<head->val<<endl;
+            head->next=head->prev=NULL;
         }
         else
         {
-            Node *temp=head;
             while(temp->next!=NULL)
                 temp=temp->next;
             temp->next=node;
-            // cout<<temp->val<<endl;
+            node->prev=temp;
+            node->next=NULL;
         }
         size++;
-        // cout<<"AT size "<<size<<endl;
-        // print(head);
+        // cout<<size<<endl;
+        return;
     }
     
     void addAtIndex(int index, int val) {
+        Node *node = new Node(val), *temp=head;
         if(index>size || index<0) return;
-        Node *node=new Node(val);
-        // index++;
-        if(index==0){
+        if(index==0)
+        {
             addAtHead(val);
-            // size++;
-            // cout<<"AI size "<<size<<endl;
-            // print(head);
+            // cout<<size<<endl;
             return;
         }
-        if(index==size){
+        else if(index==size)
+        {
             addAtTail(val);
-            // size++;
-            // cout<<"AI size "<<size<<endl;
-            // print(head);
+            // cout<<size<<endl;
             return;
         }
-        if(head==NULL)
+        else 
         {
-            head=node;
-            // cout<<head->val<<endl;
-        }
-        else
-        {
-            Node *temp=head, *prev;
+            Node *p, *temp=head;
             while(index--)
             {
-                prev=temp;
+                p=temp;
                 temp=temp->next;
             }
-            prev->next=node;
+            p->next=node;
+            node->prev=p;
             node->next=temp;
-            // cout<<prev->next->val<<endl;
+            temp->prev=node;
         }
         size++;
-        // cout<<"AI size "<<size<<endl;
-        // print(head);
+        // cout<<size<<endl;
+        return;
     }
     
     void deleteAtIndex(int index) {
+        // cout<<index<<" Size "<<size<<" ";
         if(index>=size || index<0) return;
-        if(index==0) head=head->next;
+        else if(index==0) head=head->next;
         else
         {
-            Node *temp=head, *prev;
-            while(index--)
+            Node *p, *temp=head;
+            while(index>0)
             {
-                prev=temp;
+                p=temp;
                 temp=temp->next;
+                index--;
             }
-            prev->next=temp->next;
+            p->next=temp->next;
+            if(temp->next!=NULL)
+                temp->next->prev=p;
+            temp->next=NULL;
+            temp->prev=NULL;
+            delete(temp);
         }
         size--;
-        // cout<<"D size "<<size<<endl;
+        // cout<<size<<endl;
+        return;
     }
 };
 
