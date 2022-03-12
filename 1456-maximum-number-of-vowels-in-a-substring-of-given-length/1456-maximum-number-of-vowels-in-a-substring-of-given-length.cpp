@@ -1,26 +1,24 @@
 class Solution {
 public:
-    bool isVow(char ch)
+    bool isVowel(char a)
     {
-        if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u')
-            return true;
+        if(a=='a' || a=='e' || a=='i' || a=='o' || a=='u') return true;
         return false;
     }
     int maxVowels(string str, int k) {
-        int s=0,e=0,count=0,vow=0,maxVow=INT_MIN,n=str.length();
+        int s=0, e=0, n=str.length(), vow=0, mx=INT_MIN, count=0;
         while(e<n)
         {
-            if(isVow(str[e++]))
-                vow++;
+            if(isVowel(str[e++])) vow++;
+            mx=max(mx,vow);
             count++;
             while(count==k)
             {
-                maxVow = max(maxVow,vow);
-                if(isVow(str[s++]))
+                if(isVowel(str[s++]))
                     vow--;
                 count--;
             }
         }
-        return maxVow;
+        return mx;
     }
 };
