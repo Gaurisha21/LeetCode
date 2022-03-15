@@ -9,32 +9,29 @@ using namespace std;
 
 class Solution {
   public:
-  int kadane(vector<int> nums)
-  {
-      int n=nums.size(), gsum = INT_MIN, csum = 0;
-      for(int i=0; i<n; i++)
-      {
-          csum=max(nums[i],nums[i]+csum);
-          gsum=max(csum,gsum);
-      }
-      return gsum;
-  }
-    int maximumSumRectangle(int R, int C, vector<vector<int>> nums) {
-        int n=R, m=C, maxSum=INT_MIN;
-        
-        for(int firstRow=0; firstRow<n; firstRow++)
+    int kadane(vector<int> arr)
+    {
+        int cs=0, gs=INT_MIN, n=arr.size();
+        for(int i=0; i<n; i++)
         {
-            vector<int>ans(m,0);
-            //fill(ans.begin(),ans.end(),0);
-            for(int row=firstRow; row<n; row++)
+            cs=max(arr[i],cs+arr[i]);
+            gs=max(gs,cs);
+        }
+        return gs;
+    }
+    int maximumSumRectangle(int R, int C, vector<vector<int>> M) {
+        int ans=INT_MIN;
+        for(int firstRow=0; firstRow<R; firstRow++)
+        {
+            vector<int> a(C,0);
+            for(int row=firstRow; row<R; row++)
             {
-                for(int col=0; col<m; col++)
-                    ans[col]+=nums[row][col];
-                int sum=kadane(ans);
-                maxSum=max(maxSum,sum);
+                for(int col=0; col<C; col++)
+                    a[col]+=M[row][col];
+                ans=max(ans,kadane(a));
             }
         }
-        return maxSum;
+        return ans;
     }
 };
 
