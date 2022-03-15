@@ -1,5 +1,5 @@
 # Maximum sum Rectangle
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:20px">Given a 2D matrix M of dimensions RxC. Find the maximum sum subarray in it.</span></p>
 
