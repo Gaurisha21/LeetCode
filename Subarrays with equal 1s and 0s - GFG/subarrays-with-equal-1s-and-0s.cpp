@@ -11,19 +11,16 @@ class Solution{
     long long int countSubarrWithEqualZeroAndOne(int arr[], int n)
     {
         for(int i=0; i<n; i++)
-        {
-            if(arr[i]==0)
-                arr[i]=-1;
-        }
-        int e=0,sum=0,ans=0;
-        unordered_map<long long, int> map;
+            if(arr[i]==0) arr[i]=-1;
+        unordered_map<int,int> map;
         map[0]=1;
-        while(e<n)
+        int sum=0, ans=0;
+        for(int i=0; i<n; i++)
         {
-            sum+=arr[e];
+            int ele=arr[i];
+            sum+=ele;
             ans+=map[sum];
             map[sum]++;
-            e++;
         }
         return ans;
     }
