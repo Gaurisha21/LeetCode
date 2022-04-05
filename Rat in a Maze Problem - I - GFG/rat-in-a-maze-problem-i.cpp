@@ -8,16 +8,13 @@ using namespace std;
  // } Driver Code Ends
 // User function template for C++
 
-
-
 class Solution{
     public:
-    int maze(int sr, int sc, vector<vector<int>> dir, vector<string> dirS, string s, vector<vector<int>> &m, vector<string> &ans)
+    int path(int sr, int sc, int er, int ec, vector<vector<int>> dir, vector<string> dirS, string &str, vector<string> &ans, vector<vector<int>> m, int n)
     {
-        int n=m.size();
-        if(sr==n-1 and sc==n-1)
+        if(sr==er and sc==ec)
         {
-            ans.push_back(s);
+            ans.push_back(str);
             return 1;
         }
         int count=0;
@@ -28,19 +25,20 @@ class Solution{
             int c=sc+dir[d][1];
             if(r>=0 and c>=0 and r<n and c<n and m[r][c]==1)
             {
-                count+=maze(r,c,dir,dirS,s+dirS[d],m,ans);
+                string f=str+dirS[d];
+                count+=path(r,c,er,ec,dir,dirS,f,ans,m,n);
             }
         }
         m[sr][sc]=1;
         return count;
     }
     vector<string> findPath(vector<vector<int>> &m, int n) {
-        vector<vector<int>> dir{{-1,0},{1,0},{0,-1},{0,1}};
-        vector<string> dirS{"U","D","L","R"};
+        vector<vector<int>> dir{{-1,0},{1,0},{0,1},{0,-1}};
+        vector<string> dirS{"U","D","R","L"};
         vector<string> ans;
-        string s="";
+        string str="";
         if(m[0][0]==0 || m[n-1][n-1]==0) return ans;
-        int count=maze(0,0,dir,dirS,"",m,ans);
+        int a = path(0,0,n-1,n-1,dir,dirS,str,ans,m,n);
         return ans;
     }
 };
