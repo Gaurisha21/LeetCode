@@ -12,13 +12,11 @@ class Solution
         vector<long long> narr(n,-1);
         stack<int> st;
         st.push(-1);
-        for(long long i=0; i<n; i++)
+        for(long long i=n-1; i>=0; i--)
         {
             while(st.top()!=-1 and arr[i]>arr[st.top()])
-            {
-                narr[st.top()]=arr[i];
                 st.pop();
-            }
+            narr[i] = st.top()!=-1 ? arr[st.top()] : -1;
             st.push(i);
         }
         return narr;
