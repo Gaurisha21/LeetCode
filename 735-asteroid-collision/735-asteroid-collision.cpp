@@ -17,7 +17,7 @@ public:
             if(st.empty()) st.push(arr[i]);
             else if(st.top()<0 and arr[i]>0)
             {
-                cout<<"Pushing 1: "<<arr[i]<<endl;
+                // cout<<"Pushing 1: "<<arr[i]<<endl;
                 st.push(arr[i]);
             }
             else if(st.top()>0 and arr[i]<0)
@@ -26,12 +26,12 @@ public:
                 {
                     while(!st.empty() and st.top()>0 and st.top()< arr[i]*(-1))
                     {
-                        cout<<"Poping: "<<st.top()<<endl;
+                        // cout<<"Poping: "<<st.top()<<endl;
                         st.pop();
                     }
                     if(st.empty() or arr[i]*(-1) > st.top())
                     {
-                        cout<<"Pushing 2: "<<arr[i]<<endl;
+                        // cout<<"Pushing 2: "<<arr[i]<<endl;
                         st.push(arr[i]);
                     }
                     else if(st.empty() or arr[i]*(-1) == st.top())
@@ -44,7 +44,7 @@ public:
             }
             else 
             {
-                cout<<"Pushing 3: "<<arr[i]<<endl;
+                // cout<<"Pushing 3: "<<arr[i]<<endl;
                 st.push(arr[i]);
             }
         }
