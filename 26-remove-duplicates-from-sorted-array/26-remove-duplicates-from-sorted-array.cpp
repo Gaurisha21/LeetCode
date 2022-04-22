@@ -12,8 +12,6 @@ public:
             }
             j++;
         }
-        // for(int ele : nums)
-        //     cout<<ele<<" ";
         return i+1;
     }
 };
