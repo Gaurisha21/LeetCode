@@ -9,41 +9,20 @@
  */
 class Solution {
 public:
-    vector<TreeNode *> nodeToRoot(TreeNode *root, TreeNode *target)//, vector<int> &path)
+    TreeNode *node=NULL;
+    bool LCA(TreeNode* root, TreeNode* p, TreeNode* q)
     {
         if(root==NULL)
-            return {};
-        if(root==target)
-            return {root};
-        vector<TreeNode *> l, r;
-        l=nodeToRoot(root->left,target);
-        if(l.size()!=0)
-        {
-            l.push_back(root);
-            return l;
-        }
-        r=nodeToRoot(root->right,target);
-        if(r.size()!=0)
-        {
-            r.push_back(root);
-            return r;
-        }
-        return {};
+            return false;
+        bool self = (root==p||root==q);
+        bool Left = LCA(root->left,p,q);
+        bool Right = LCA(root->right,p,q);
+        if((self && Left)||(self && Right)||(Left && Right))
+            node=root;
+        return (self||Left||Right);
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        vector<TreeNode *> ppath, qpath;
-        ppath = nodeToRoot(root, p);
-        qpath = nodeToRoot(root,q);
-        TreeNode * LCA;
-        int i=ppath.size()-1, j=qpath.size()-1;
-        while(i>=0 and j>=0)
-        {
-            if(ppath[i]!=qpath[j])
-                break;
-            LCA = ppath[i];
-            i--;
-            j--;
-        }
-        return LCA;
+        LCA(root,p,q);
+        return node;
     }
-};
+}; 
