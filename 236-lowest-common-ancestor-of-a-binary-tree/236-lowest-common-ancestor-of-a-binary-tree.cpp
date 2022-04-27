@@ -30,26 +30,20 @@ public:
         }
         return {};
     }
-    void reverse(vector<TreeNode *> &path)
-    {
-        int i=0, j=path.size()-1;
-        while(i<=j)
-            swap(path[i++],path[j--]);
-    }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         vector<TreeNode *> ppath, qpath;
         ppath = nodeToRoot(root, p);
         qpath = nodeToRoot(root,q);
-        reverse(ppath);
-        reverse(qpath);
-        int i=0, j=0;
-        while(i<ppath.size() and j<qpath.size())
+        TreeNode * LCA;
+        int i=ppath.size()-1, j=qpath.size()-1;
+        while(i>=0 and j>=0)
         {
             if(ppath[i]!=qpath[j])
                 break;
-            i++;
-            j++;
+            LCA = ppath[i];
+            i--;
+            j--;
         }
-        return ppath[i-1];
+        return LCA;
     }
 };
