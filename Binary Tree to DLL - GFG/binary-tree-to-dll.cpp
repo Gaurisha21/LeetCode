@@ -107,42 +107,28 @@ struct Node
 class Solution
 {
     public: 
-    //Function to convert binary tree to doubly linked list and return it.
-    Node * rightMost(Node *node, Node *curr)
+    void leftNode(Node* root, stack<Node*>&st)
     {
-        while(node->right!=NULL and node->right!=curr)
-        node=node->right;
-        return node;
+        while(root!=NULL)
+        {
+            st.push(root);
+            root=root->left;
+        }
     }
+    //Function to convert binary tree to doubly linked list and return it.
     Node * bToDLL(Node *root)
     {
-        Node *curr=root, *d=newNode(-1), *p=d;
-        while(curr!=NULL)
+        stack<Node*> st;
+        leftNode(root,st);
+        Node *d=newNode(-1), *p=d;
+        while(!st.empty())
         {
-            if(curr->left==NULL)
-            {
-                p->right=curr;
-                curr->left=p;
-                p=curr;
-                curr=curr->right;
-            }
-            else
-            {
-                Node *rm=rightMost(curr->left, curr);
-                if(rm->right==NULL)
-                {
-                    rm->right=curr;
-                    curr=curr->left;
-                }
-                else
-                {
-                    rm->right=NULL;
-                    p->right=curr;
-                    curr->left=p;
-                    p=curr;
-                    curr=curr->right;
-                }
-            }
+            Node *node=st.top();
+            st.pop();
+            p->right=node;
+            node->left=p;
+            p=node;
+            leftNode(node->right,st);
         }
         Node *head=d->right;
         head->left=NULL;
