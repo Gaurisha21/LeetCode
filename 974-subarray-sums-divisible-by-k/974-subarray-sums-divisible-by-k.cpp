@@ -8,7 +8,7 @@ public:
         {
             sum += nums[e];
             int rem = (sum%k+k)%k;;
-            if(map.find(rem)!=map.end()) 
+            // if(map.find(rem)!=map.end()) 
                 ans += map[rem];
             map[rem]++;            
             e++;
