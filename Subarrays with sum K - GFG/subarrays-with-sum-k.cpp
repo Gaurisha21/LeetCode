@@ -7,17 +7,19 @@ using namespace std;
 
 class Solution{
     public:
-    int findSubArraySum(int arr[], int N, int k)
+    int findSubArraySum(int Arr[], int N, int k)
     {
-        unordered_map<int,int> mp;
-        int ans=0, cumsum=0;
-        for(int i=0; i<N; i++)
+        int e=0, sum=0, ans=0;
+        unordered_map<int,int> map;
+        while(e<N)
         {
-            cumsum+=arr[i];
-            if(cumsum==k) ans++;
-            if(mp.find(cumsum-k)!=mp.end()) 
-                ans+=mp[cumsum-k];
-            mp[cumsum]++;
+            sum+=Arr[e];
+            if(sum==k)
+                ans++;
+            if(map.find(sum-k)!=map.end())
+                ans+=map[sum-k];
+            map[sum]++;
+            e++;
         }
         return ans;
     }
