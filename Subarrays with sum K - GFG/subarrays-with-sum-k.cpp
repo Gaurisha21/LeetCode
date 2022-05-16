@@ -16,8 +16,8 @@ class Solution{
             sum+=Arr[e];
             if(sum==k)
                 ans++;
-            if(map.find(sum-k)!=map.end())
-                ans+=map[sum-k];
+            // if(map.find(sum-k)!=map.end())
+            ans+=map[sum-k];
             map[sum]++;
             e++;
         }
