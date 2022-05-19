@@ -1,8 +1,8 @@
 class Solution {
 public:
-    int perm(vector<int> nums, vector<vector<int>> &ans, vector<int> &smallAns, int idx)
+    int perm(vector<int> nums, vector<vector<int>> &ans, vector<int> &smallAns)
     {
-        if(idx==nums.size())
+        if(smallAns.size()==nums.size())
         {
             ans.push_back(smallAns);
             return 1;
@@ -16,7 +16,7 @@ public:
                 nums[i]=-11;
                 vector<int> tem = smallAns;
                 tem.push_back(temp);
-                count+=perm(nums,ans,tem,idx+1);
+                count+=perm(nums,ans,tem);
                 nums[i]=temp;
             }
         }
@@ -25,7 +25,7 @@ public:
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> ans;
         vector<int> smallAns;
-        int s=perm(nums,ans,smallAns,0);
+        int s=perm(nums,ans,smallAns);
         return ans;
     }
 };
