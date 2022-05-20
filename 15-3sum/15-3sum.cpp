@@ -1,48 +1,34 @@
 class Solution {
 public:
-    vector<vector<int>> twoSum(vector<int> arr, int s, int e, int k)
-    {
-        int n=(e-s+1);
+    vector<vector<int>> twoSum(vector<int>& nums, int k, int s, int e) {
         vector<vector<int>> ans;
         while(s<e)
         {
-            // fill(paiR.begin(), paiR.end(),0);
-            if(arr[s]+arr[e]==k)
-            {
-                ans.push_back({arr[s],arr[e]});
+            int sum=nums[s]+nums[e];
+            if(sum==k)
+            { 
+                ans.push_back({nums[s],nums[e]});
                 s++;
                 e--;
-                while(arr[s]==arr[s-1] and s<e) s++;
-                while(arr[e]==arr[e+1] and s<e) e--;
+                while(nums[s]==nums[s-1] and s<e) s++;
+                while(nums[e]==nums[e+1] and s<e) e--;
             }
-            else if(arr[s]+arr[e]>k)
-            {
-                // while(arr[e]==arr[e-1] and e!=0) e--;
-                e--;
-            }
-            else
-            {
-                // while(arr[s]==arr[s+1] and s!=n-1) s++;
-                s++;
-            }
+            else if(sum>k) e--;
+            else s++;
         }
         return ans;
     }
     vector<vector<int>> threeSum(vector<int>& nums) {
-        int n=nums.size(),j,k, target = 0;
-        sort(nums.begin(),nums.end());
+        int n=nums.size();
         vector<vector<int>> ans;
-        for(int i=0; i<n-1;)
+        sort(nums.begin(), nums.end());
+        for(int i=0; i<n;)
         {
-            vector<vector<int>> pr = twoSum(nums,i+1,n-1,(target-nums[i]));
-            for(vector<int> p : pr)
-            {
-                j=p[0], k=p[1];
-                // cout<<j<<" "<<i<<endl;
-                ans.push_back({nums[i],j,k});
-            }
+            vector<vector<int>> arr=twoSum(nums,-nums[i], i+1, n-1);
+            for(vector<int> ele:arr)
+                ans.push_back({nums[i],ele[0],ele[1]});
+            while(i<n-1 and nums[i]==nums[i+1]) i++;
             i++;
-            while(i<n-1 and nums[i]==nums[i-1]) i++;
         }
         return ans;
     }
