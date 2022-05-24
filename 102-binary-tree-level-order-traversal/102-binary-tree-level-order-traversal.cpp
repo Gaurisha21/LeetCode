@@ -11,28 +11,19 @@
  */
 class Solution {
 public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
+    void burnTree(TreeNode *root, int time, vector<vector<int>> &ans)
+    {
         if(root==NULL)
-            return {};
-        queue<TreeNode*> q;
+            return;
+        if(time==ans.size())
+            ans.push_back({});
+        ans[time].push_back(root->val);
+        burnTree(root->left, time+1, ans);
+        burnTree(root->right, time+1, ans);
+    }
+    vector<vector<int>> levelOrder(TreeNode* root) {
         vector<vector<int>> ans;
-        q.push(root);
-        while(!q.empty())
-        {
-            int s=q.size();
-            vector<int> smallAns;
-            for(int i=0; i<s; i++)
-            {
-                TreeNode *node = q.front();
-                q.pop();
-                smallAns.push_back(node->val);
-                if(node->left!=NULL)
-                    q.push(node->left);
-                if(node->right!=NULL)
-                    q.push(node->right);
-            }
-            ans.push_back(smallAns);
-        }
+        burnTree(root, 0, ans);
         return ans;
     }
 };
