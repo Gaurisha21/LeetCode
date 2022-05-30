@@ -1,9 +1,9 @@
 class Solution {
 public:
-    int perm(vector<int> nums, int idx, vector<vector<int>> &ans, vector<int> &arr)
+    int perm(vector<int> nums, vector<vector<int>> &ans, vector<int> &arr)
     {
         int n=nums.size();
-        if(idx==n)
+        if(arr.size()==n)
         {
             ans.push_back(arr);
             return 1;
@@ -19,7 +19,7 @@ public:
                 int temp=nums[i];
                 nums[i] = -11;
                 arr.push_back(temp);
-                count+=perm(nums,idx+1,ans,arr);
+                count+=perm(nums,ans,arr);
                 arr=t;
                 nums[i] = temp;
             }
@@ -30,7 +30,7 @@ public:
         vector<vector<int>> ans;
         vector<int> arr;
         sort(nums.begin(), nums.end());
-        int s=perm(nums,0,ans,arr);
+        int s=perm(nums,ans,arr);
         // cout<<s;
         return ans;
     }
