@@ -38,10 +38,10 @@ public:
     TreeNode* sortedListToBST(ListNode* head) {
         if(head==NULL)
             return NULL;
-        if(head->next==NULL)
-        {
-            return new TreeNode(head->val);
-        }
+        // if(head->next==NULL)
+        // {
+        //     return new TreeNode(head->val);
+        // }
         vector<ListNode*> arr = midNode(head);
         ListNode *mid=arr[1];
         // cout<<mid->val<<endl;
