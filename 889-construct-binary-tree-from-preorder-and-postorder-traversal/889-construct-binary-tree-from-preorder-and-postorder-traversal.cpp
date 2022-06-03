@@ -11,32 +11,31 @@
  */
 class Solution {
 public:
-    int searchPos(vector<int> postorder, int curr, int start, int end)
+    int i=0;
+    int search(vector<int> postorder, int start, int end, int curr)
     {
-        for(int i=start; i<=end; i++)
+        for(int j=start; j<=end; j++)
         {
-            if(curr==postorder[i])
-                return i;
+            if(postorder[j]==curr)
+                return j;
         }
         return -1;
     }
-    TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder, int start, int end, vector<int> &idx)
+    TreeNode* build(vector<int> preorder, vector<int> postorder, int start, int end)
     {
         if(start>end)
             return NULL;
-        int curr=preorder[idx[0]];
-        idx[0]++;
-        TreeNode *root=new TreeNode(curr);
+        int curr=preorder[i++];
+        TreeNode* node = new TreeNode(curr);
         if(start==end)
-            return root;
-        int pos = searchPos(postorder, preorder[idx[0]], start, end);
-        root->left=constructFromPrePost(preorder, postorder, start, pos, idx);
-        root->right=constructFromPrePost(preorder, postorder, pos+1, end-1, idx);
-        return root;
+            return node;
+        int pos = search(postorder, start, end, preorder[i]);
+        node->left = build(preorder, postorder, start, pos);
+        node->right = build(preorder, postorder, pos+1, end-1);
+        return node;
     }
     TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
         int n=preorder.size()-1;
-        vector<int> idx(1,0);
-        return constructFromPrePost(preorder, postorder, 0, n, idx);
+        return build(preorder, postorder, 0, n);
     }
 };
