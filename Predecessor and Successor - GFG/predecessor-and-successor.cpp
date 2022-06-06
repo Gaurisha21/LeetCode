@@ -106,37 +106,49 @@ struct Node
 
 // This function finds predecessor and successor of key in BST.
 // It sets pre and suc as predecessor and successor respectively
-#include<stack>
-void insertLeft(Node *root, stack<Node*> &st)
+
+Node *rightMost(Node* node)
 {
-    while(root!=NULL)
-    {
-        st.push(root);
-        root=root->left;
-    }
+    if (node == NULL)
+        return NULL;
+    while(node->right!=NULL)
+        node=node->right;
+    return node;
 }
 
-void prnsc(Node* node, int data, Node* &pre, Node* &suc) {
-  stack<Node*> st;
-  insertLeft(node,st);
-  while(!st.empty())
-  {
-      Node *curr = st.top();
-      st.pop();
-      insertLeft(curr->right,st);
-      if(curr->key>=data)
-      {
-        if(curr->key==data)
-            suc = st.empty() ? NULL : st.top();
-        else 
-            suc = curr;
-        break;
-      }
-      pre = curr;
-  }
-    // cout<<pre->key<<" "<<suc->key<<endl;
+Node *leftMost(Node* node)
+{
+    if (node == NULL)
+        return NULL;
+    while(node->left!=NULL)
+        node=node->left;
+    return node;
 }
+
 void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
 {
-    prnsc(root, key, pre, suc);
+    pre = NULL;
+    suc = NULL;
+    Node *curr=root;
+    while(curr!=NULL)
+    {
+        if(curr->key==key)
+        {
+            Node *Right=curr->right, *Left=curr->left;
+            pre = rightMost(Left) != NULL ? rightMost(Left) : pre;
+            suc = leftMost(Right) != NULL ? leftMost(Right) : suc;
+            break;
+        }
+        else if(curr->key>key)
+        {
+            suc=curr;
+            curr=curr->left;
+        }
+        else
+        {
+            pre=curr;
+            curr=curr->right;
+        }
+    }
+    return;
 }
