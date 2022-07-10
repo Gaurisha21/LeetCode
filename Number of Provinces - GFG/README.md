@@ -1,5 +1,5 @@
 # Number of Provinces
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a graph with <strong>V</strong> vertices. Find the number of Provinces.<br>
 <strong>Note: </strong></span> <span style="font-size:18px">A province is a group of directly or indirectly connected cities and no other cities outside of the group. </span></p>
