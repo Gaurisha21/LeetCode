@@ -8,36 +8,49 @@ using namespace std;
 
 class Solution {
   public:
-  void dfs(vector<vector<int>> &graph, int src, vector<int> &vis)
+  void bfs(vector<vector<int>> graph, vector<int> &vis, int src)
   {
-      vis[src]=1;
-      for(int i=0; i<graph[src].size(); i++)
+      queue<int> q;
+      q.push(src);
+      while(!q.empty())
       {
-          if(vis[graph[src][i]]!=1)
-            dfs(graph, graph[src][i], vis);
+          int size = q.size();
+          for(int i=0; i<size; i++)
+          {
+              int vrt = q.front();
+              q.pop();
+              if(vis[vrt]==1)
+                continue;
+              vis[vrt]=1;
+              for(int j=0; j<graph[vrt].size(); j++)
+              {
+                  if(vis[graph[vrt][j]]==0)
+                  q.push(graph[vrt][j]);
+              }
+          }
       }
   }
     int numProvinces(vector<vector<int>> adj, int V) {
-        vector<int> vis(V,0);
         vector<vector<int>> graph(V);
-         for(int i=0;i<V;i++)
+        vector<int> vis(V,0);
+        for(int i=0;i<V;i++)
+       {
+           for(int j=i+1;j<V;j++)
            {
-               for(int j=i+1;j<V;j++)
+               if(adj[i][j]==1)
                {
-                   if(adj[i][j]==1)
-                   {
-                       graph[i].push_back(j);
-                       graph[j].push_back(i);
-                   }
+                   graph[i].push_back(j);
+                   graph[j].push_back(i);
                }
            }
-        int comp=0;
+       }
+       int comp=0;
         for(int i=0; i<V; i++)
         {
             if(vis[i]!=1)
             {
                 comp++;
-                dfs(graph,i,vis);
+                bfs(graph,vis,i);
             }
         }
         return comp;
