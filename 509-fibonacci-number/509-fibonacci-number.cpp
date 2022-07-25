@@ -1,12 +1,18 @@
 class Solution {
 public:
-    int fib(int n, vector<int> &dp)
+    int fib(int N, vector<int> &dp)
     {
-        if(n<=1)
-            return dp[n]=n;
-        if(dp[n]!=-1)
-            return dp[n];
-        return dp[n]=fib(n-1,dp)+fib(n-2,dp);
+        for(int n=0; n<=N; n++)
+        {
+            if(n<=1)
+            {
+                dp[n]=n;
+                continue;
+            }
+            int ans = dp[n-1]+dp[n-2];
+            dp[n] = ans;
+        }
+        return dp[N];
     }
     int fib(int n) {
         vector<int> dp(n+1,-1);
