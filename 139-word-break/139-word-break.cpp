@@ -25,7 +25,7 @@ public:
         int n=s.length();
         vector<int> dp(n+1,-1);
         int ans = wordBreak(s,wordDict,dp);
-        cout<<ans<<endl;
+        // cout<<ans<<endl;
         return ans;
     }
 };
