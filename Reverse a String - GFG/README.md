@@ -1,7 +1,6 @@
 # Reverse a String
 ## Easy
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">You are given a string s. You need to reverse the string.</span></p>
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">You are given a string s. You need to reverse the string.</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
@@ -25,5 +24,4 @@
 
 <p><span style="font-size:18px"><strong>Constraints:</strong><br>
 1 &lt;= |s|&nbsp;&lt;= 10000</span></p>
- <p></p>
-            </div>
+</div>
