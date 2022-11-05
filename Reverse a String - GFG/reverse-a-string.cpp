@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 //Initial Template for C++
 
 
@@ -24,14 +24,16 @@ int main() {
 	
 }
 
+
 // } Driver Code Ends
 
 
 //User function Template for C++
 
 string reverseWord(string str){
-    int i=0, n=str.length(), j=n-1;
-    while(i<=j)
-        swap(str[i++],str[j--]);
+    int n=str.length(), s=0, e=n-1;
+    while(s<=e)
+        swap(str[s++],str[e--]);
     return str;
 }
+
