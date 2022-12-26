@@ -1,7 +1,6 @@
 # Subarrays with sum K
-## Medium 
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given an unsorted array of integers, find the number of continuous subarrays having sum exactly equal to a given number k.</span></p>
+## Medium
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given an unsorted array of integers, find the number of continuous subarrays having sum exactly equal to a given number k.</span></p>
 
 <p><br>
 <span style="font-size:18px"><strong>Example 1:</strong></span></p>
@@ -40,5 +39,4 @@ You don't need to read input or print anything. Your task is to complete the fun
 1 ≤ N ≤ 2*10<sup>4</sup><br>
 -10<sup>3</sup> ≤ Arr[i]&nbsp;≤ 10<sup>3</sup><br>
 -10<sup>7</sup>&nbsp;≤ k&nbsp;≤ 10<sup>7</sup></span></p>
- <p></p>
-            </div>
+</div>
