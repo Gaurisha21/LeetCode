@@ -1,31 +1,28 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 
- // } Driver Code Ends
+// } Driver Code Ends
 //User function Template for C++
 
 class Solution{
     public:
-    int findSubArraySum(int Arr[], int N, int k)
+    int findSubArraySum(int arr[], int n, int k)
     {
-        int e=0, sum=0, ans=0;
-        unordered_map<int,int> map;
-        while(e<N)
+        unordered_map<int,int> mp;
+        mp[0]=1;
+        int s=0, cumsum=0,ans=0;
+        while(s<n)
         {
-            sum+=Arr[e];
-            if(sum==k)
-                ans++;
-            // if(map.find(sum-k)!=map.end())
-            ans+=map[sum-k];
-            map[sum]++;
-            e++;
+            cumsum+=arr[s++];
+            ans+=mp[cumsum-k];
+            mp[cumsum]++;
         }
         return ans;
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 int main()
 {
     int t;
@@ -43,4 +40,5 @@ int main()
         cout<<obj.findSubArraySum(Arr, N, k)<<endl;
     }
     return 0;
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
